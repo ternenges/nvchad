@@ -36,12 +36,16 @@ M.which_key = {
 M.ui = { statusline = { separator_style = "arrow" } }
 
 M.cmp = function()
-  --  local cmp = require"cmp"
+  local cmp = require "cmp"
+
   return {
-    -- ["<CR>"] = cmp.mapping.confirm {
-    --   behavior = cmp.ConfirmBehavior.Replace,
-    --   select = true,
-    -- },
+    mapping = {
+      ["<CR>"] = cmp.mapping.confirm {
+        select = true,
+      },
+    },
+    sources = { { name = "treesitter" }, { name = "null-ls" } },
+    experimental = { ghost_text = true },
   }
 end
 

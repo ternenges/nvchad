@@ -7,7 +7,7 @@ end
 local opts = {
   mode = "document_diagnostics",
   position = "bottom",
-  auto_open = true,
+  auto_open = false,
   auto_close = true,
 }
 
