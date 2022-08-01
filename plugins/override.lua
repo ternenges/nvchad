@@ -20,8 +20,19 @@ M.nvimtree = {
   },
 }
 
+--M.cmp = require "custom.plugins.cmp"
 M.which_key = {
-  plugins = { spelling = { enabled = true } },
+  plugins = {
+    marks = true,
+    registers = true,
+    spelling = { enabled = false },
+  },
+  icons = {
+    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+    separator = "  ", -- symbol used between a key and it's label
+    group = "⬊ ", -- symbol prepended to a group
+  },
+
   window = {
     padding = { 2, 2, 2, 2 },
   },
@@ -31,24 +42,17 @@ M.which_key = {
     spacing = 6,
     align = "left",
   },
-  ignore_missing = true,
+  ignore_missing = false,
 }
-M.ui = { statusline = { separator_style = "arrow" } }
-
-M.cmp = function()
-  local cmp = require "cmp"
-
-  return {
-    mapping = {
-      ["<CR>"] = cmp.mapping.confirm {
-        select = true,
-      },
-    },
-    sources = { { name = "treesitter" }, { name = "null-ls" } },
-    experimental = { ghost_text = true },
-  }
-end
-
+M.ui = {
+  statusline = {
+    separator_style = "round",
+    overriden_Modules = function()
+      local custom = require "custom.ui"
+      return custom
+    end,
+  },
+}
 M.treesitter = {
   autoinstall = true,
   autotag = {
@@ -67,4 +71,6 @@ M.treesitter = {
     max_file_lines = nil,
   },
 }
+
+---{}
 return M
